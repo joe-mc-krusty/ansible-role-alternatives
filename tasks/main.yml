@@ -1,0 +1,8 @@
+---
+- name: Manage alternatives
+  alternatives:
+    name: "{{ item.name }}"
+    path: "{{ item.path }}"
+    link: "{{ item.link | default(omit) }}"
+    priority: "{{ item.priority | default(alternatives_priority_default) }}"
+  loop: "{{ alternatives }}"
