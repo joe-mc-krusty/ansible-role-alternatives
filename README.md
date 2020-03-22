@@ -1,31 +1,60 @@
-Role Name
+Ansible Role: Alternatives
 =========
 
-A brief description of the role goes here.
+A Role for managing Alternatives
+
+** co-maintainers welcome **
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Update-alternatives must be available (alternatives package)
+This missing dependency will be addressed in the future within the role itself.
+
+See TODO section of README.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```yaml
+alternatives:
+  - name: python
+    path: /usr/bin/python3
+    link: /usr/bin/python # optional
+
+  - name: hadoop-conf
+    link: /etc/hadoop/conf
+    path: /etc/hadoop/conf.ansible
+  
+  - name: java
+    path: /usr/lib/jvm/java-7-openjdk-i386/jre/bin/java
+    priority: -10 # optional - default = 50
+```
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
+```yaml
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - joe_mc_krusty.alternatives
+    
+    # OR
+
+    - hosts: servers
+      tasks:
+        - include_role:
+            name: joe_mc_krusty.alternatives
+```
+
+TODO
+----
+- Check for alternatives tool installation on any OS
 
 License
 -------
